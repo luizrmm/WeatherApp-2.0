@@ -22,7 +22,16 @@ class CurrentWeather extends Equatable {
   });
 
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object> get props => [
+        condition,
+        location,
+        lastUpdate,
+        temperatureC,
+        temperatureC,
+        uv,
+        preciptationMM,
+        humidity,
+      ];
 }
 
 class Location extends Equatable {
@@ -39,7 +48,7 @@ class Location extends Equatable {
   });
 
   @override
-  List<Object?> get props => [
+  List<Object> get props => [
         name,
         region,
         country,
@@ -57,7 +66,7 @@ class Condition extends Equatable {
     required this.code,
   });
   @override
-  List<Object?> get props => [
+  List<Object> get props => [
         text,
         code,
         icon,
