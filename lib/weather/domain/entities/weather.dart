@@ -1,19 +1,33 @@
 import 'package:equatable/equatable.dart';
 
-class CurrentWeather extends Equatable {
+class Weather extends Equatable {
   final Location location;
+  final Current current;
+
+  const Weather({
+    required this.location,
+    required this.current,
+  });
+
+  @override
+  List<Object> get props => [
+        location,
+        current,
+      ];
+}
+
+class Current extends Equatable {
   final Condition condition;
-  final DateTime lastUpdate;
+  final String lastUpdated;
   final double temperatureC;
   final double temperatureF;
   final double uv;
   final double preciptationMM;
   final int humidity;
 
-  const CurrentWeather({
-    required this.location,
+  const Current({
     required this.condition,
-    required this.lastUpdate,
+    required this.lastUpdated,
     required this.temperatureC,
     required this.temperatureF,
     required this.uv,
@@ -22,12 +36,11 @@ class CurrentWeather extends Equatable {
   });
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         condition,
-        location,
-        lastUpdate,
+        lastUpdated,
         temperatureC,
-        temperatureC,
+        temperatureF,
         uv,
         preciptationMM,
         humidity,
@@ -38,7 +51,7 @@ class Location extends Equatable {
   final String name;
   final String region;
   final String country;
-  final DateTime localtime;
+  final String localtime;
 
   const Location({
     required this.name,

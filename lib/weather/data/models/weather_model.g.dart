@@ -1,35 +1,42 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'current_weather_model.dart';
+part of 'weather_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-CurrentWeatherModel _$CurrentWeatherModelFromJson(Map<String, dynamic> json) =>
-    CurrentWeatherModel(
+WeatherModel _$WeatherModelFromJson(Map<String, dynamic> json) => WeatherModel(
       location:
           LocationModel.fromJson(json['location'] as Map<String, dynamic>),
+      current: CurrentModel.fromJson(json['current'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$WeatherModelToJson(WeatherModel instance) =>
+    <String, dynamic>{
+      'location': instance.location.toJson(),
+      'current': instance.current.toJson(),
+    };
+
+CurrentModel _$CurrentModelFromJson(Map<String, dynamic> json) => CurrentModel(
       condition:
           ConditionModel.fromJson(json['condition'] as Map<String, dynamic>),
-      lastUpdate: DateTime.parse(json['lastUpdate'] as String),
-      temperatureC: (json['temperatureC'] as num).toDouble(),
-      temperatureF: (json['temperatureF'] as num).toDouble(),
+      lastUpdated: json['last_updated'] as String,
+      temperatureC: (json['temp_c'] as num).toDouble(),
+      temperatureF: (json['temp_f'] as num).toDouble(),
       uv: (json['uv'] as num).toDouble(),
-      preciptationMM: (json['preciptationMM'] as num).toDouble(),
+      preciptationMM: (json['precip_mm'] as num).toDouble(),
       humidity: json['humidity'] as int,
     );
 
-Map<String, dynamic> _$CurrentWeatherModelToJson(
-        CurrentWeatherModel instance) =>
+Map<String, dynamic> _$CurrentModelToJson(CurrentModel instance) =>
     <String, dynamic>{
-      'location': instance.location.toJson(),
       'condition': instance.condition.toJson(),
-      'lastUpdate': instance.lastUpdate.toIso8601String(),
-      'temperatureC': instance.temperatureC,
-      'temperatureF': instance.temperatureF,
+      'last_updated': instance.lastUpdated,
+      'temp_c': instance.temperatureC,
+      'temp_f': instance.temperatureF,
       'uv': instance.uv,
-      'preciptationMM': instance.preciptationMM,
+      'precip_mm': instance.preciptationMM,
       'humidity': instance.humidity,
     };
 
@@ -52,7 +59,7 @@ LocationModel _$LocationModelFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String,
       region: json['region'] as String,
       country: json['country'] as String,
-      localtime: DateTime.parse(json['localtime'] as String),
+      localtime: json['localtime'] as String,
     );
 
 Map<String, dynamic> _$LocationModelToJson(LocationModel instance) =>
@@ -60,5 +67,5 @@ Map<String, dynamic> _$LocationModelToJson(LocationModel instance) =>
       'name': instance.name,
       'region': instance.region,
       'country': instance.country,
-      'localtime': instance.localtime.toIso8601String(),
+      'localtime': instance.localtime,
     };

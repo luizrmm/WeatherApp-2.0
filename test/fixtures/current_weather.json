@@ -1,0 +1,21 @@
+{
+  "location": {
+    "name": "Muzambinho",
+    "region": "Minas Gerais",
+    "country": "Brazil",
+    "localtime": "2022-02-08 21:21"
+  },
+  "current": {
+    "last_updated": "2022-02-08 20:00",
+    "temp_c": 19.3,
+    "temp_f": 66.7,
+    "condition": {
+      "text": "Light rain shower",
+      "icon": "//cdn.weatherapi.com/weather/64x64/night/353.png",
+      "code": 1240
+    },
+    "precip_mm": 1.5,
+    "humidity": 97,
+    "uv": 1.0
+  }
+}

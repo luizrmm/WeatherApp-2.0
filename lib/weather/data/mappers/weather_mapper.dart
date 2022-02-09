@@ -1,12 +1,27 @@
-import 'package:weather_app/weather/data/models/current_weather_model.dart';
-import 'package:weather_app/weather/domain/entities/current_weather.dart';
+import 'package:weather_app/weather/data/models/weather_model.dart';
+import 'package:weather_app/weather/domain/entities/weather.dart';
 
-class CurrentWeatherMapper {
-  static CurrentWeather toEntity(CurrentWeatherModel model) {
-    return CurrentWeather(
+class WeatherMapper {
+  static Weather toEntity(WeatherModel model) {
+    return Weather(
       location: _LocationMapper.toEntity(model.location),
+      current: _CurrentMapper.toEntity(model.current),
+    );
+  }
+
+  static WeatherModel toModel(Weather entity) {
+    return WeatherModel(
+      location: _LocationMapper.toModel(entity.location),
+      current: _CurrentMapper.toModel(entity.current),
+    );
+  }
+}
+
+class _CurrentMapper {
+  static Current toEntity(CurrentModel model) {
+    return Current(
       condition: _ConditionMapper.toEntity(model.condition),
-      lastUpdate: model.lastUpdate,
+      lastUpdated: model.lastUpdated,
       temperatureC: model.temperatureC,
       temperatureF: model.temperatureF,
       uv: model.uv,
@@ -15,11 +30,10 @@ class CurrentWeatherMapper {
     );
   }
 
-  static CurrentWeatherModel toModel(CurrentWeather entity) {
-    return CurrentWeatherModel(
-      location: _LocationMapper.toModel(entity.location),
+  static CurrentModel toModel(Current entity) {
+    return CurrentModel(
       condition: _ConditionMapper.toModel(entity.condition),
-      lastUpdate: entity.lastUpdate,
+      lastUpdated: entity.lastUpdated,
       temperatureC: entity.temperatureC,
       temperatureF: entity.temperatureF,
       uv: entity.uv,
