@@ -1,0 +1,1 @@
+class GetWeatherException implements Exception {}

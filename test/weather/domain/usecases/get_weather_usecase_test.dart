@@ -5,8 +5,7 @@ import 'package:weather_app/weather/domain/entities/weather.dart';
 import 'package:weather_app/weather/domain/repositories/weather_repository.dart';
 import 'package:weather_app/weather/domain/usecases/get_weather_usecase.dart';
 
-class MockCurrentWeatherRepository extends Mock
-    implements CurrentWeatherRepository {}
+class MockCurrentWeatherRepository extends Mock implements WeatherRepository {}
 
 void main() {
   late GetWeatherUseCase usecase;

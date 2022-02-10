@@ -6,7 +6,7 @@ import 'package:weather_app/weather/domain/entities/weather.dart';
 import 'package:weather_app/weather/domain/repositories/weather_repository.dart';
 
 class GetWeatherUseCase implements UseCase<Weather, GetWeatherParams> {
-  final CurrentWeatherRepository repository;
+  final WeatherRepository repository;
 
   GetWeatherUseCase(this.repository);
   @override
