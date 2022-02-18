@@ -25,6 +25,9 @@ class Current extends Equatable {
   final double preciptationMM;
   final int humidity;
 
+  int get tempCInteger => temperatureC.toInt();
+  int get tempFInteger => temperatureF.toInt();
+
   const Current({
     required this.condition,
     required this.lastUpdated,
