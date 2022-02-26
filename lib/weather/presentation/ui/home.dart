@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:weather_app/core/helpers/date_helpers.dart';
+import 'package:weather_app/core/helpers/weather_condition.dart';
 import 'package:weather_app/injection_container.dart';
 import 'package:weather_app/weather/presentation/bloc/weather_bloc.dart';
 import 'package:weather_app/weather/presentation/ui/widgets/custom_field.dart';
@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return BlocProvider<WeatherBloc>(
       create: (context) =>
-          sl<WeatherBloc>()..add(const GetWeatherEvent(query: 'Muzambinho')),
+          sl<WeatherBloc>()..add(const GetWeatherEvent(query: 'Vancouver')),
       child: const WeatherView(),
     );
   }
@@ -60,9 +60,12 @@ class WeatherView extends StatelessWidget {
                       const SizedBox(
                         height: 80,
                       ),
-                      SvgPicture.asset(
-                        'assets/teste.svg',
-                        height: 113,
+                      Image.asset(
+                        'assets/icons/${getIcon(
+                          state.weather.current.condition.code,
+                          state.weather.current.lastUpdated,
+                        )}.png',
+                        height: 130,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 32.0, bottom: 16.0),
@@ -91,6 +94,18 @@ class WeatherView extends StatelessWidget {
                           fontSize: 70.0,
                           fontWeight: FontWeight.w500,
                         ),
+                      ),
+                      Text(
+                        state.weather.current.condition.text,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: Color(0xFFC4C4C4),
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
                       ),
                       Container(
                         height: 60.0,
