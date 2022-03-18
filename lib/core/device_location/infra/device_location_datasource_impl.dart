@@ -27,8 +27,14 @@ class DeviceLocationDatasourceImpl implements DeviceLocationDatasource {
       geolocator.isLocationServiceEnabled();
 
   @override
-  Future<bool> checkLocationPermission() {
-    // TODO: implement checkLocationPermission
-    throw UnimplementedError();
+  Future<bool> checkLocationPermission() async {
+    LocationPermission permission = await geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      throw LocationPermissionException();
+    } else if (permission == LocationPermission.deniedForever) {
+      throw LocationPermissionForeverException();
+    } else {
+      return true;
+    }
   }
 }
