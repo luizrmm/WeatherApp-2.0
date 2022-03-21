@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/core/device_location/presentation/bloc/device_location_bloc.dart';
 
 import 'package:weather_app/injection_container.dart';
 import 'package:weather_app/weather/presentation/bloc/weather_bloc.dart';
@@ -14,6 +15,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final TextEditingController searchTextController = TextEditingController();
+  @override
+  void initState() {
+    BlocProvider.of<DeviceLocationBloc>(context).add(const GetLocationEvent());
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -24,10 +30,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<WeatherBloc>(
-      create: (context) => sl<WeatherBloc>()
-        ..add(
-          const GetWeatherEvent(query: 'Muzambinho'),
-        ),
+      create: (context) => sl<WeatherBloc>(),
       child: WeatherView(
         searchTextController: searchTextController,
       ),
