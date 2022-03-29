@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:weather_app/core/device_location/data/datasources/device_location_datasource.dart';
 import 'package:weather_app/core/device_location/data/models/device_location_model.dart';
@@ -35,7 +36,7 @@ void main() {
         (invocation) async => true,
       );
       when(() => mockDataSource.checkLocationPermission())
-          .thenAnswer((invocation) async => true);
+          .thenAnswer((invocation) async => LocationPermission.always);
       when(() => mockDataSource.getLocation())
           .thenAnswer((invocation) async => tDeviceLocationModel);
 
@@ -55,7 +56,7 @@ void main() {
         (invocation) async => false,
       );
       when(() => mockDataSource.checkLocationPermission())
-          .thenAnswer((invocation) async => true);
+          .thenAnswer((invocation) async => LocationPermission.always);
       when(() => mockDataSource.getLocation())
           .thenAnswer((invocation) async => tDeviceLocationModel);
 

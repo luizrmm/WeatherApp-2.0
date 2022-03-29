@@ -27,14 +27,28 @@ class DeviceLocationDatasourceImpl implements DeviceLocationDatasource {
       geolocator.isLocationServiceEnabled();
 
   @override
-  Future<bool> checkLocationPermission() async {
+  Future<LocationPermission> checkLocationPermission() async {
     LocationPermission permission = await geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      throw LocationPermissionException();
+    if (permission == LocationPermission.unableToDetermine) {
+      throw LocationPermissionUnableToDetermineException();
+    } else if (permission == LocationPermission.denied) {
+      return _requestLocationPermission();
     } else if (permission == LocationPermission.deniedForever) {
       throw LocationPermissionForeverException();
     } else {
-      return true;
+      return permission;
+    }
+  }
+
+  Future<LocationPermission> _requestLocationPermission() async {
+    final permission = await geolocator.requestPermission();
+    switch (permission) {
+      case LocationPermission.denied:
+        throw LocationPermissionException();
+      case LocationPermission.deniedForever:
+        throw LocationPermissionForeverException();
+      default:
+        return permission;
     }
   }
 }

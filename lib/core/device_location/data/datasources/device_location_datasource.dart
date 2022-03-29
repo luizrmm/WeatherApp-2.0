@@ -1,3 +1,4 @@
+import 'package:geolocator/geolocator.dart';
 import 'package:weather_app/core/device_location/data/models/device_location_model.dart';
 import 'package:weather_app/core/device_location/domain/errors/device_location_exceptions.dart';
 
@@ -15,5 +16,5 @@ abstract class DeviceLocationDatasource {
   ///calls the location external library
   ///and check gps device permission
   ///throws a [LocationPermissionException] for any exception
-  Future<bool> checkLocationPermission();
+  Future<LocationPermission> checkLocationPermission();
 }

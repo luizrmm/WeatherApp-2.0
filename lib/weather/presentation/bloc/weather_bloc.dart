@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:weather_app/core/device_location/domain/entities/device_location.dart';
-import 'package:weather_app/core/device_location/domain/usecases/get_device_location_usecase.dart';
+
 import 'package:weather_app/weather/domain/entities/weather.dart';
 import 'package:weather_app/weather/domain/usecases/get_weather_usecase.dart';
 

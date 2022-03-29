@@ -23,6 +23,9 @@ void main() {
     accuracy: 200,
   );
 
+  const tPermissionWhileInUse = LocationPermission.whileInUse;
+  const tPermissionAlways = LocationPermission.always;
+
   group("Service Location status:", () {
     test("should return true when servicelocation is enabled", () async {
       //arrange
@@ -54,18 +57,51 @@ void main() {
   });
 
   group("Checkpermission:", () {
-    test("should throw permission danied if user deny", () async {
+    test(
+        "should throw  [LocationPermissionUnableToDetermineException] user deny 2 times",
+        () async {
       //arrange
-      when(() => mockGeolocator.checkPermission())
-          .thenAnswer((invocation) async => LocationPermission.denied);
+      when(() => mockGeolocator.checkPermission()).thenAnswer(
+          (invocation) async => LocationPermission.unableToDetermine);
+
       //act
       final call = datasourceImpl.checkLocationPermission;
 
       //assert
+
+      expect(() => call(),
+          throwsA(isA<LocationPermissionUnableToDetermineException>()));
+    });
+    test("should call the request permission if user deny 1 time", () async {
+      //arrange
+      when(() => mockGeolocator.checkPermission())
+          .thenAnswer((invocation) async => LocationPermission.denied);
+      when(() => mockGeolocator.requestPermission())
+          .thenAnswer((_) async => LocationPermission.always);
+      //act
+      await datasourceImpl.checkLocationPermission();
+
+      //assert
+      verify(() => mockGeolocator.requestPermission()).called(1);
+    });
+
+    test("should throw  [LocationPermissionException] user deny 2 times",
+        () async {
+      //arrange
+      when(() => mockGeolocator.checkPermission())
+          .thenAnswer((invocation) async => LocationPermission.denied);
+      when(() => mockGeolocator.requestPermission())
+          .thenAnswer((_) async => LocationPermission.denied);
+      //act
+      final call = datasourceImpl.checkLocationPermission;
+
+      //assert
+
       expect(() => call(), throwsA(isA<LocationPermissionException>()));
     });
 
-    test("should throw permission danied forever if user deny forever",
+    test(
+        "should throw [LocationPermissionForeverException] if user deny forever",
         () async {
       //arrange
       when(() => mockGeolocator.checkPermission())
@@ -77,7 +113,9 @@ void main() {
       expect(() => call(), throwsA(isA<LocationPermissionForeverException>()));
     });
 
-    test("should return  truee if user accept location permission", () async {
+    test(
+        "should return [LocationPermission.always] if user accept location permission",
+        () async {
       //arrange
       when(() => mockGeolocator.checkPermission())
           .thenAnswer((invocation) async => LocationPermission.always);
@@ -85,7 +123,19 @@ void main() {
       final result = await datasourceImpl.checkLocationPermission();
 
       //assert
-      expect(result, true);
+      expect(result, tPermissionAlways);
+    });
+
+    test("""should return  [LocationPermission.whileInUse] if user accept 
+        location permission while app is in use""", () async {
+      //arrange
+      when(() => mockGeolocator.checkPermission())
+          .thenAnswer((invocation) async => LocationPermission.whileInUse);
+      //act
+      final result = await datasourceImpl.checkLocationPermission();
+
+      //assert
+      expect(result, tPermissionWhileInUse);
     });
   });
 
