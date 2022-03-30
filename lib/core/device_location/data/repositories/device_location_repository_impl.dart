@@ -16,19 +16,19 @@ class DeviceLocationRepositoryImpl implements DeviceLocationRepository {
       try {
         await datasource.checkLocationPermission();
       } on LocationPermissionException {
-        return Left(LocationPermissionFailure());
+        return const Left(LocationPermissionFailure());
       } on LocationPermissionForeverException {
-        return Left(
-          LocationPermissionForeverFailure(),
-        );
+        return const Left(LocationPermissionForeverFailure());
+      } on LocationPermissionUnableToDetermineException {
+        return const Left(LocationUnableToDetermineFailure());
       }
       try {
         return Right(await datasource.getLocation());
       } on GetLocationException {
-        return Left(GetLocationFailure());
+        return const Left(GetLocationFailure());
       }
     } else {
-      return Left(LocationDisabledFailure());
+      return const Left(LocationDisabledFailure());
     }
   }
 }

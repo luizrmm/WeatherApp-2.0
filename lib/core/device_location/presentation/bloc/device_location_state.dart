@@ -7,7 +7,12 @@ abstract class DeviceLocationState extends Equatable {
   List<Object> get props => [];
 }
 
-class DeviceLocationInitial extends DeviceLocationState {}
+class DeviceLocationInitial extends DeviceLocationState {
+  const DeviceLocationInitial();
+
+  @override
+  List<Object> get props => [];
+}
 
 class LocationStateSuccess extends DeviceLocationState {
   final DeviceLocation location;
@@ -26,5 +31,6 @@ class LocationStateLoading extends DeviceLocationState {
 }
 
 class LocationStateError extends DeviceLocationState {
-  const LocationStateError();
+  final Failure errorType;
+  const LocationStateError(this.errorType);
 }

@@ -68,7 +68,7 @@ void main() {
       verifyNever(() => mockDataSource.checkLocationPermission());
       expect(
           result,
-          Left(
+          const Left(
             LocationDisabledFailure(),
           ));
     });
@@ -93,7 +93,7 @@ void main() {
       verify(() => mockDataSource.checkLocationPermission());
       expect(
         result,
-        Left(
+        const Left(
           LocationPermissionFailure(),
         ),
       );
@@ -119,8 +119,34 @@ void main() {
       verify(() => mockDataSource.checkLocationPermission());
       expect(
         result,
-        Left(
+        const Left(
           LocationPermissionForeverFailure(),
+        ),
+      );
+    });
+
+    test(
+        "should return location unable to determine failure when location is unable to determine",
+        () async {
+      //arrange
+      when(() => mockDataSource.serviceLocationStatus).thenAnswer(
+        (invocation) async => true,
+      );
+      when(() => mockDataSource.checkLocationPermission())
+          .thenThrow(LocationPermissionUnableToDetermineException());
+      when(() => mockDataSource.getLocation())
+          .thenAnswer((invocation) async => tDeviceLocationModel);
+
+      //act
+      final result = await repositoryImpl.getLocation();
+
+      //assert
+      verify(() => mockDataSource.serviceLocationStatus);
+      verify(() => mockDataSource.checkLocationPermission());
+      expect(
+        result,
+        const Left(
+          LocationUnableToDetermineFailure(),
         ),
       );
     });

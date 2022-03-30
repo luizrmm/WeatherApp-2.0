@@ -18,5 +18,6 @@ class DeviceLocation extends Equatable {
         longitude,
         latitude,
         lastPositionTime,
+        accuracy,
       ];
 }
