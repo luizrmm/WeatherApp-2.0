@@ -4,17 +4,19 @@ import 'package:weather_app/weather/presentation/bloc/weather_bloc.dart';
 
 class CustomField extends StatelessWidget {
   final TextEditingController controller;
-  const CustomField({
-    Key? key,
-    required this.controller,
-  }) : super(key: key);
+  const CustomField({Key? key, required this.controller, required this.formKey})
+      : super(key: key);
+
+  final GlobalKey<FormState> formKey;
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: controller,
-      onSubmitted: (value) {
-        search(value, context);
+      onFieldSubmitted: (value) {
+        if (formKey.currentState!.validate()) {
+          search(value, context);
+        }
       },
       decoration: InputDecoration(
         contentPadding:
@@ -23,7 +25,9 @@ class CustomField extends StatelessWidget {
         fillColor: Theme.of(context).colorScheme.secondary,
         suffixIcon: IconButton(
           onPressed: () {
-            search(controller.text, context);
+            if (formKey.currentState!.validate()) {
+              search(controller.text, context);
+            }
           },
           icon: Icon(
             Icons.search,
@@ -37,6 +41,12 @@ class CustomField extends StatelessWidget {
           borderSide: BorderSide.none,
         ),
       ),
+      validator: (value) {
+        if (value!.isEmpty) {
+          return "Locations is required";
+        }
+        return null;
+      },
     );
   }
 

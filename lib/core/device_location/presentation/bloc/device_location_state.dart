@@ -26,10 +26,6 @@ class LocationStateInitial extends DeviceLocationState {
   const LocationStateInitial();
 }
 
-class LocationStateLoading extends DeviceLocationState {
-  const LocationStateLoading();
-}
-
 class LocationStateError extends DeviceLocationState {
   final Failure errorType;
   const LocationStateError(this.errorType);

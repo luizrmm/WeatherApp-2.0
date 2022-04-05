@@ -48,7 +48,6 @@ void main() {
         verify(() => mockGetDeviceLocationUseCase(any())).called(1);
       },
       expect: () => [
-        const LocationStateLoading(),
         equals(LocationStateSuccess(tDeviceLocation)),
       ],
     );
@@ -66,7 +65,6 @@ void main() {
         verify(() => mockGetDeviceLocationUseCase(any())).called(1);
       },
       expect: () => [
-        const LocationStateLoading(),
         equals(const LocationStateError(failure)),
       ],
     );

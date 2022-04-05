@@ -5,7 +5,6 @@ import 'package:weather_app/core/device_location/presentation/bloc/device_locati
 import 'package:weather_app/injection_container.dart';
 import 'package:weather_app/weather/presentation/bloc/weather_bloc.dart';
 import 'package:weather_app/weather/presentation/ui/widgets/enable_location.dart';
-import 'package:weather_app/weather/presentation/ui/widgets/weather_error.dart';
 import 'package:weather_app/weather/presentation/ui/widgets/weather_view.dart';
 
 class HomePage extends StatefulWidget {
@@ -35,22 +34,14 @@ class _HomePageState extends State<HomePage> {
       create: (context) => sl<WeatherBloc>(),
       child: BlocBuilder<DeviceLocationBloc, DeviceLocationState>(
         builder: (context, state) {
-          if (state is LocationStateInitial) {
-            return Container();
-          } else if (state is LocationStateSuccess) {
+          if (state is LocationStateSuccess) {
             _getWeather(context, state);
             return WeatherView(searchTextController: searchTextController);
-          } else if (state is LocationStateSuccess) {
+          } else if (state is LocationStateError) {
             return const EnableLocation();
-          } else if (state is LocationStateLoading) {
-            return Material(
-              child: Container(),
-            );
+          } else {
+            return Container();
           }
-          return const Material(
-              child: Center(
-            child: WeatherErrorWidget(),
-          ));
         },
       ),
     );

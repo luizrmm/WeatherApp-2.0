@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
 
-class WeatherErrorWidget extends StatelessWidget {
-  const WeatherErrorWidget({Key? key}) : super(key: key);
+class ErrorFetchWeather extends StatelessWidget {
+  const ErrorFetchWeather({
+    Key? key,
+    required this.message,
+  }) : super(key: key);
+  final String message;
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Text('🙈', style: TextStyle(fontSize: 64)),
+        Image.asset('assets/cloud_error.png'),
         Text(
-          'Something went wrong!',
-          style: theme.textTheme.headline5,
+          message,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 24,
+            color: Theme.of(context).textTheme.headline1!.color,
+            fontWeight: FontWeight.w500,
+          ),
         ),
       ],
     );

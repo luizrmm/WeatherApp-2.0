@@ -16,7 +16,6 @@ class DeviceLocationBloc
   }
   Future<void> _getLocation(
       GetLocationEvent event, Emitter<DeviceLocationState> emit) async {
-    emit(const LocationStateLoading());
     final result = await deviceLocationUseCase(GetDeviceLocationParams());
     result.fold(
       (failure) => emit(LocationStateError(failure)),
