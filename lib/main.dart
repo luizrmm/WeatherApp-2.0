@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:weather_app/core/device_location/presentation/bloc/device_location_bloc.dart';
+import 'package:weather_app/core/ui/themes.dart';
 import 'package:weather_app/weather/presentation/ui/home.dart';
 import 'package:weather_app/injection_container.dart' as di;
 
@@ -22,10 +22,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          textTheme: GoogleFonts.poppinsTextTheme(),
-        ),
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        themeMode: ThemeMode.system,
         home: const HomePage(),
       ),
     );

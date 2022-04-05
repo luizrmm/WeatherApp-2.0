@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:weather_app/core/helpers/date_helpers.dart';
 
 class WeatherInfo extends StatelessWidget {
@@ -21,9 +21,7 @@ class WeatherInfo extends StatelessWidget {
       width: double.maxFinite,
       padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 20),
       decoration: BoxDecoration(
-        color: const Color(
-          0xFFFDFCFC,
-        ),
+        color: Theme.of(context).colorScheme.secondary,
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Row(
@@ -33,10 +31,10 @@ class WeatherInfo extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
+              Text(
                 'TIME',
                 style: TextStyle(
-                  color: Color(0xFFC4C4C4),
+                  color: Theme.of(context).hintColor,
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
                 ),
@@ -45,8 +43,8 @@ class WeatherInfo extends StatelessWidget {
                 formatDateAmPm(
                   lastUpdate,
                 ),
-                style: const TextStyle(
-                  color: Color(0xFF9A9A9A),
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.headline2!.color,
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
@@ -56,18 +54,18 @@ class WeatherInfo extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
+              Text(
                 'UV',
                 style: TextStyle(
-                  color: Color(0xFFC4C4C4),
+                  color: Theme.of(context).hintColor,
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               Text(
                 uv,
-                style: const TextStyle(
-                  color: Color(0xFF9A9A9A),
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.headline2!.color,
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
@@ -77,18 +75,18 @@ class WeatherInfo extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
+              Text(
                 'PREC',
                 style: TextStyle(
-                  color: Color(0xFFC4C4C4),
+                  color: Theme.of(context).hintColor,
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               Text(
                 preciptation,
-                style: const TextStyle(
-                  color: Color(0xFF9A9A9A),
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.headline2!.color,
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
@@ -98,18 +96,18 @@ class WeatherInfo extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
+              Text(
                 'HUMIDITY',
                 style: TextStyle(
-                  color: Color(0xFFC4C4C4),
+                  color: Theme.of(context).hintColor,
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               Text(
                 '$humidity  %',
-                style: const TextStyle(
-                  color: Color(0xFF9A9A9A),
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.headline2!.color,
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),

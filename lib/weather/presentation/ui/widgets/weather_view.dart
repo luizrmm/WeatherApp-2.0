@@ -17,7 +17,6 @@ class WeatherView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFFFFF),
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.only(
@@ -56,9 +55,10 @@ class WeatherView extends StatelessWidget {
                       LocationName(state.weather.location.name),
                       Text(
                         '${state.weather.current.tempCInteger.toString()} ˚',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 70.0,
                           fontWeight: FontWeight.w500,
+                          color: Theme.of(context).textTheme.headline1!.color,
                         ),
                       ),
                       Text(

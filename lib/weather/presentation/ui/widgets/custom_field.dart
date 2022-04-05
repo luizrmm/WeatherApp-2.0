@@ -20,23 +20,18 @@ class CustomField extends StatelessWidget {
         contentPadding:
             const EdgeInsets.symmetric(vertical: 8, horizontal: 16.0),
         filled: true,
-        fillColor: const Color(
-          0xFFFDFCFC,
-        ),
+        fillColor: Theme.of(context).colorScheme.secondary,
         suffixIcon: IconButton(
           onPressed: () {
             search(controller.text, context);
           },
-          icon: const Icon(
+          icon: Icon(
             Icons.search,
             size: 18,
-            color: Color(0xFFC4C4C4),
+            color: Theme.of(context).hintColor,
           ),
         ),
         hintText: "Search Location",
-        hintStyle: const TextStyle(
-          color: Color(0xFFC4C4C4),
-        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15.0),
           borderSide: BorderSide.none,

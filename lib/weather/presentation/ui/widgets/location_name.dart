@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class LocationName extends StatelessWidget {
@@ -17,7 +17,11 @@ class LocationName extends StatelessWidget {
         children: [
           Text(
             location,
-            style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
+            style: TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.w600,
+              color: Theme.of(context).textTheme.headline1!.color,
+            ),
           ),
           const SizedBox(
             width: 12.0,
@@ -26,6 +30,7 @@ class LocationName extends StatelessWidget {
             'assets/arrow.svg',
             height: 21,
             width: 21,
+            color: Theme.of(context).iconTheme.color,
           )
         ],
       ),
