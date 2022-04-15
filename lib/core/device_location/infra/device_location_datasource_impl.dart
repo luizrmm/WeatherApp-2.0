@@ -4,18 +4,19 @@ import 'package:weather_app/core/device_location/data/models/device_location_mod
 import 'package:weather_app/core/device_location/domain/errors/device_location_exceptions.dart';
 
 class DeviceLocationDatasourceImpl implements DeviceLocationDatasource {
+  DeviceLocationDatasourceImpl(this.geolocator);
   final GeolocatorPlatform geolocator;
 
-  DeviceLocationDatasourceImpl(this.geolocator);
   @override
   Future<DeviceLocationModel> getLocation() async {
     try {
-      final Position position = await geolocator.getCurrentPosition();
-      final DeviceLocationModel deviceLocationModel = DeviceLocationModel(
-          longitude: position.longitude,
-          latitude: position.latitude,
-          lastPositionTime: position.timestamp ?? DateTime.now(),
-          accuracy: position.accuracy);
+      final position = await geolocator.getCurrentPosition();
+      final deviceLocationModel = DeviceLocationModel(
+        longitude: position.longitude,
+        latitude: position.latitude,
+        lastPositionTime: position.timestamp ?? DateTime.now(),
+        accuracy: position.accuracy,
+      );
       return deviceLocationModel;
     } catch (e) {
       throw GetLocationException();
@@ -28,7 +29,7 @@ class DeviceLocationDatasourceImpl implements DeviceLocationDatasource {
 
   @override
   Future<LocationPermission> checkLocationPermission() async {
-    LocationPermission permission = await geolocator.checkPermission();
+    final permission = await geolocator.checkPermission();
     if (permission == LocationPermission.unableToDetermine) {
       throw LocationPermissionUnableToDetermineException();
     } else if (permission == LocationPermission.denied) {
@@ -47,7 +48,11 @@ class DeviceLocationDatasourceImpl implements DeviceLocationDatasource {
         throw LocationPermissionException();
       case LocationPermission.deniedForever:
         throw LocationPermissionForeverException();
-      default:
+      case LocationPermission.whileInUse:
+        return permission;
+      case LocationPermission.always:
+        return permission;
+      case LocationPermission.unableToDetermine:
         return permission;
     }
   }

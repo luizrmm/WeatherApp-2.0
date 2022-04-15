@@ -20,16 +20,16 @@ void main() {
     repositoryImpl = DeviceLocationRepositoryImpl(mockDataSource);
   });
 
-  final DeviceLocationModel tDeviceLocationModel = DeviceLocationModel(
-    longitude: 43.0,
-    latitude: 42.0,
-    lastPositionTime: DateTime.parse("2022-02-08T21:21:00.000"),
+  final tDeviceLocationModel = DeviceLocationModel(
+    longitude: 43,
+    latitude: 42,
+    lastPositionTime: DateTime.parse('2022-02-08T21:21:00.000'),
     accuracy: 200,
   );
 
-  group("Device location repository GetLocation:", () {
+  group('Device location repository GetLocation:', () {
     test(
-        "should return device location entity when call to datasource is successfully",
+        'should return device location entity when call to datasource is successfully',
         () async {
       //arrange
       when(() => mockDataSource.serviceLocationStatus).thenAnswer(
@@ -49,7 +49,7 @@ void main() {
       expect(result, Right(tDeviceLocationModel));
     });
 
-    test("should return location disabled failure when location is disabled",
+    test('should return location disabled failure when location is disabled',
         () async {
       //arrange
       when(() => mockDataSource.serviceLocationStatus).thenAnswer(
@@ -67,14 +67,15 @@ void main() {
       verify(() => mockDataSource.serviceLocationStatus);
       verifyNever(() => mockDataSource.checkLocationPermission());
       expect(
-          result,
-          const Left(
-            LocationDisabledFailure(),
-          ));
+        result,
+        const Left(
+          LocationDisabledFailure(),
+        ),
+      );
     });
 
     test(
-        "should return location permission failure when location permission is denied one time",
+        'should return location permission failure when location permission is denied one time',
         () async {
       //arrange
       when(() => mockDataSource.serviceLocationStatus).thenAnswer(
@@ -100,7 +101,7 @@ void main() {
     });
 
     test(
-        "should return location permission forever failure when location permission is denied for ever",
+        'should return location permission forever failure when location permission is denied for ever',
         () async {
       //arrange
       when(() => mockDataSource.serviceLocationStatus).thenAnswer(
@@ -126,7 +127,7 @@ void main() {
     });
 
     test(
-        "should return location unable to determine failure when location is unable to determine",
+        'should return location unable to determine failure when location is unable to determine',
         () async {
       //arrange
       when(() => mockDataSource.serviceLocationStatus).thenAnswer(

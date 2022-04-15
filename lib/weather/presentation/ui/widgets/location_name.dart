@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class LocationName extends StatelessWidget {
-  final String location;
   const LocationName(
     this.location, {
     Key? key,
   }) : super(key: key);
+  final String location;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 32.0, bottom: 16.0),
+      padding: const EdgeInsets.only(top: 32, bottom: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -24,7 +24,7 @@ class LocationName extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            width: 12.0,
+            width: 12,
           ),
           SvgPicture.asset(
             'assets/arrow.svg',

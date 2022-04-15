@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/weather/presentation/bloc/weather_bloc.dart';
 
 class CustomField extends StatelessWidget {
-  final TextEditingController controller;
   const CustomField({Key? key, required this.controller, required this.formKey})
       : super(key: key);
 
   final GlobalKey<FormState> formKey;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +19,7 @@ class CustomField extends StatelessWidget {
         }
       },
       decoration: InputDecoration(
-        contentPadding:
-            const EdgeInsets.symmetric(vertical: 8, horizontal: 16.0),
+        contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         filled: true,
         fillColor: Theme.of(context).colorScheme.secondary,
         suffixIcon: IconButton(
@@ -35,15 +34,15 @@ class CustomField extends StatelessWidget {
             color: Theme.of(context).hintColor,
           ),
         ),
-        hintText: "Search Location",
+        hintText: 'Search Location',
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15.0),
+          borderRadius: BorderRadius.circular(15),
           borderSide: BorderSide.none,
         ),
       ),
       validator: (value) {
         if (value!.isEmpty) {
-          return "Locations is required";
+          return 'Locations is required';
         }
         return null;
       },

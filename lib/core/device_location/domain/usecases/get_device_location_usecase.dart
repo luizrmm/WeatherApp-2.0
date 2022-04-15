@@ -6,9 +6,9 @@ import 'package:weather_app/core/usecases/usecase.dart';
 
 class GetDeviceLocationUseCase
     implements UseCase<DeviceLocation, GetDeviceLocationParams> {
+  GetDeviceLocationUseCase(this.repository);
   final DeviceLocationRepository repository;
 
-  GetDeviceLocationUseCase(this.repository);
   @override
   Future<Either<Failure, DeviceLocation>> call(GetDeviceLocationParams params) {
     return repository.getLocation();

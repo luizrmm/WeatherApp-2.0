@@ -47,10 +47,11 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  _getWeather(BuildContext context, LocationStateSuccess state) {
+  void _getWeather(BuildContext context, LocationStateSuccess state) {
     BlocProvider.of<WeatherBloc>(context, listen: false).add(
       GetWeatherEvent(
-          query: '${state.location.latitude},${state.location.longitude}'),
+        query: '${state.location.latitude},${state.location.longitude}',
+      ),
     );
   }
 }

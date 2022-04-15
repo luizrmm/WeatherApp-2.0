@@ -5,15 +5,15 @@ part 'weather_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class WeatherModel extends Equatable {
-  final LocationModel location;
-  final CurrentModel current;
   const WeatherModel({
     required this.location,
     required this.current,
   });
-
   factory WeatherModel.fromJson(Map<String, dynamic> json) =>
       _$WeatherModelFromJson(json);
+
+  final LocationModel location;
+  final CurrentModel current;
 
   Map<String, dynamic> toJson() => _$WeatherModelToJson(this);
 
@@ -23,6 +23,19 @@ class WeatherModel extends Equatable {
 
 @JsonSerializable(explicitToJson: true)
 class CurrentModel extends Equatable {
+  const CurrentModel({
+    required this.condition,
+    required this.lastUpdated,
+    required this.temperatureC,
+    required this.temperatureF,
+    required this.uv,
+    required this.preciptationMM,
+    required this.humidity,
+  });
+
+  factory CurrentModel.fromJson(Map<String, dynamic> json) =>
+      _$CurrentModelFromJson(json);
+
   @JsonKey(name: 'condition')
   final ConditionModel condition;
   @JsonKey(name: 'last_updated')
@@ -37,19 +50,6 @@ class CurrentModel extends Equatable {
   final double preciptationMM;
   @JsonKey(name: 'humidity')
   final int humidity;
-
-  const CurrentModel({
-    required this.condition,
-    required this.lastUpdated,
-    required this.temperatureC,
-    required this.temperatureF,
-    required this.uv,
-    required this.preciptationMM,
-    required this.humidity,
-  });
-
-  factory CurrentModel.fromJson(Map<String, dynamic> json) =>
-      _$CurrentModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$CurrentModelToJson(this);
 
@@ -67,9 +67,6 @@ class CurrentModel extends Equatable {
 
 @JsonSerializable(explicitToJson: true)
 class ConditionModel extends Equatable {
-  final String text;
-  final String icon;
-  final int code;
   const ConditionModel({
     required this.text,
     required this.icon,
@@ -79,6 +76,10 @@ class ConditionModel extends Equatable {
   factory ConditionModel.fromJson(Map<String, dynamic> json) =>
       _$ConditionModelFromJson(json);
 
+  final String text;
+  final String icon;
+  final int code;
+
   Map<String, dynamic> toJson() => _$ConditionModelToJson(this);
 
   @override
@@ -87,11 +88,6 @@ class ConditionModel extends Equatable {
 
 @JsonSerializable(explicitToJson: true)
 class LocationModel extends Equatable {
-  final String name;
-  final String region;
-  final String country;
-  final String localtime;
-
   const LocationModel({
     required this.name,
     required this.region,
@@ -101,6 +97,10 @@ class LocationModel extends Equatable {
 
   factory LocationModel.fromJson(Map<String, dynamic> json) =>
       _$LocationModelFromJson(json);
+  final String name;
+  final String region;
+  final String country;
+  final String localtime;
 
   Map<String, dynamic> toJson() => _$LocationModelToJson(this);
 

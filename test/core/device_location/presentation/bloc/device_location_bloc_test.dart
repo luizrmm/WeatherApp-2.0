@@ -25,18 +25,18 @@ void main() {
     expect(deviceLocationBloc.state, equals(const DeviceLocationInitial()));
   });
 
-  group("GET DEVICE LOCATION:", () {
-    final DeviceLocation tDeviceLocation = DeviceLocation(
-      longitude: 43.0,
-      latitude: 42.0,
-      lastPositionTime: DateTime.parse("2022-02-08T21:21:00.000"),
+  group('GET DEVICE LOCATION:', () {
+    final tDeviceLocation = DeviceLocation(
+      longitude: 43,
+      latitude: 42,
+      lastPositionTime: DateTime.parse('2022-02-08T21:21:00.000'),
       accuracy: 200,
     );
 
     const failure = LocationUnableToDetermineFailure();
 
     blocTest<DeviceLocationBloc, DeviceLocationState>(
-      "should emit [loading, success] from get Device location use case",
+      'should emit [loading, success] from get Device location use case',
       build: () {
         when(() => mockGetDeviceLocationUseCase(any()))
             .thenAnswer((_) async => Right(tDeviceLocation));
@@ -53,10 +53,11 @@ void main() {
     );
 
     blocTest<DeviceLocationBloc, DeviceLocationState>(
-      "should emit [loading, Error] from get Device location use case",
+      'should emit [loading, Error] from get Device location use case',
       build: () {
         when(() => mockGetDeviceLocationUseCase(any())).thenAnswer(
-            (_) async => const Left(LocationPermissionForeverFailure()));
+          (_) async => const Left(LocationPermissionForeverFailure()),
+        );
         return deviceLocationBloc;
       },
       seed: () => const DeviceLocationInitial(),

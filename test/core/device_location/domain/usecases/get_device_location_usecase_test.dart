@@ -17,14 +17,14 @@ void main() {
     useCase = GetDeviceLocationUseCase(mockDeviceLocationRepository);
   });
 
-  final DeviceLocation tDeviceLocation = DeviceLocation(
-    longitude: 43.0,
-    latitude: 42.0,
-    lastPositionTime: DateTime.parse("2022-02-08T21:21:00.000"),
+  final tDeviceLocation = DeviceLocation(
+    longitude: 43,
+    latitude: 42,
+    lastPositionTime: DateTime.parse('2022-02-08T21:21:00.000'),
     accuracy: 200,
   );
 
-  test("should return device location from the repository", () async {
+  test('should return device location from the repository', () async {
     //arrange
     when(() => mockDeviceLocationRepository.getLocation())
         .thenAnswer((invocation) async => Right(tDeviceLocation));

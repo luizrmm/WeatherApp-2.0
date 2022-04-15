@@ -10,7 +10,6 @@ class EnableLocation extends StatelessWidget {
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
               'assets/location.png',
@@ -21,14 +20,14 @@ class EnableLocation extends StatelessWidget {
               height: 16,
             ),
             const Text(
-              "Allow yout location",
+              'Allow yout location',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
             ),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 56),
               child: Text(
-                "We will need your location to give you a better expecience.",
+                'We will need your location to give you a better expecience.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16,
@@ -50,7 +49,7 @@ class EnableLocation extends StatelessWidget {
               onPressed: () async {
                 await Geolocator.openAppSettings();
               },
-              child: const Text("Allow"),
+              child: const Text('Allow'),
             )
           ],
         ),

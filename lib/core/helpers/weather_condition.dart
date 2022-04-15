@@ -1,20 +1,26 @@
 class IconWeather {
-  final int code;
-  final String dayIcon;
-  final String nightIcon;
   IconWeather({
     required this.code,
     required this.dayIcon,
     required this.nightIcon,
   });
+  final int code;
+  final String dayIcon;
+  final String nightIcon;
 }
 
 List<IconWeather> iconsWeather = [
   IconWeather(code: 1000, dayIcon: 'sunny', nightIcon: 'night_clear'),
   IconWeather(
-      code: 1003, dayIcon: 'partial_cloudy', nightIcon: 'night_partial_cloudy'),
+    code: 1003,
+    dayIcon: 'partial_cloudy',
+    nightIcon: 'night_partial_cloudy',
+  ),
   IconWeather(
-      code: 1006, dayIcon: 'mostly_cloudy', nightIcon: 'night_mostly_cloudy'),
+    code: 1006,
+    dayIcon: 'mostly_cloudy',
+    nightIcon: 'night_mostly_cloudy',
+  ),
   IconWeather(code: 1009, dayIcon: 'cloudy', nightIcon: 'cloudy'),
   IconWeather(code: 1030, dayIcon: 'fog', nightIcon: 'fog'),
   IconWeather(code: 1063, dayIcon: 'rain', nightIcon: 'rain'),
@@ -63,10 +69,9 @@ List<IconWeather> iconsWeather = [
 ];
 
 String getIcon(int code, String lastUpdate) {
-  final DateTime date = DateTime.parse(lastUpdate);
+  final date = DateTime.parse(lastUpdate);
 
-  final IconWeather icon =
-      iconsWeather.firstWhere((element) => element.code == code);
+  final icon = iconsWeather.firstWhere((element) => element.code == code);
   if (date.hour <= 4 || date.hour >= 18) {
     return icon.nightIcon;
   } else {

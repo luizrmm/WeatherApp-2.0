@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/weather/presentation/bloc/weather_bloc.dart';
 import 'package:weather_app/weather/presentation/ui/widgets/custom_field.dart';
+import 'package:weather_app/weather/presentation/ui/widgets/loaded_weather.dart';
 import 'package:weather_app/weather/presentation/ui/widgets/weather_error.dart';
 
-import 'loaded_weather.dart';
-
 class WeatherView extends StatefulWidget {
-  final TextEditingController searchTextController;
   const WeatherView({
     Key? key,
     required this.searchTextController,
   }) : super(key: key);
+  final TextEditingController searchTextController;
 
   @override
   State<WeatherView> createState() => _WeatherViewState();
@@ -26,9 +25,9 @@ class _WeatherViewState extends State<WeatherView> {
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.only(
-            top: 44.0,
-            left: 24.0,
-            right: 24.00,
+            top: 44,
+            left: 24,
+            right: 24,
           ),
           child: SingleChildScrollView(
             child: Column(
@@ -45,22 +44,19 @@ class _WeatherViewState extends State<WeatherView> {
                 ),
                 BlocBuilder<WeatherBloc, WeatherState>(
                   builder: (context, state) {
-                    if (state is WeatherLoading || state is WeatherInitial) {
-                      return const Center(
-                        child: CircularProgressIndicator.adaptive(),
+                    if (state is WeatherSuccess) {
+                      return LoadedWeather(
+                        state: state,
                       );
                     } else if (state is WeatherError) {
                       return ErrorFetchWeather(
                         message: state.message,
                       );
-                    } else if (state is WeatherSuccess) {
-                      return LoadedWeather(
-                        state: state,
+                    } else {
+                      return const Center(
+                        child: CircularProgressIndicator.adaptive(),
                       );
                     }
-                    throw const ErrorFetchWeather(
-                      message: "Something went wrong!",
-                    );
                   },
                 ),
               ],

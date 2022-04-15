@@ -4,7 +4,7 @@ import 'package:weather_app/weather/data/models/weather_model.dart';
 import 'package:weather_app/weather/domain/entities/weather.dart';
 
 void main() {
-  const WeatherModel tCurrentWeatherModel = WeatherModel(
+  const tCurrentWeatherModel = WeatherModel(
     location: LocationModel(
       name: 'Muzambinho',
       region: 'Minas Gerais',
@@ -20,13 +20,13 @@ void main() {
       lastUpdated: '2022-02-08 20:00',
       temperatureC: 19.3,
       temperatureF: 66.7,
-      uv: 1.0,
+      uv: 1,
       preciptationMM: 1.5,
       humidity: 97,
     ),
   );
 
-  const Weather tCurrentWeather = Weather(
+  const tCurrentWeather = Weather(
     location: Location(
       name: 'Muzambinho',
       region: 'Minas Gerais',
@@ -42,7 +42,7 @@ void main() {
       lastUpdated: '2022-02-08 20:00',
       temperatureC: 19.3,
       temperatureF: 66.7,
-      uv: 1.0,
+      uv: 1,
       preciptationMM: 1.5,
       humidity: 97,
     ),

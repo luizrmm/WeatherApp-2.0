@@ -1,13 +1,12 @@
 import 'package:equatable/equatable.dart';
 
 class Weather extends Equatable {
-  final Location location;
-  final Current current;
-
   const Weather({
     required this.location,
     required this.current,
   });
+  final Location location;
+  final Current current;
 
   @override
   List<Object> get props => [
@@ -17,17 +16,6 @@ class Weather extends Equatable {
 }
 
 class Current extends Equatable {
-  final Condition condition;
-  final String lastUpdated;
-  final double temperatureC;
-  final double temperatureF;
-  final double uv;
-  final double preciptationMM;
-  final int humidity;
-
-  int get tempCInteger => temperatureC.toInt();
-  int get tempFInteger => temperatureF.toInt();
-
   const Current({
     required this.condition,
     required this.lastUpdated,
@@ -37,6 +25,15 @@ class Current extends Equatable {
     required this.preciptationMM,
     required this.humidity,
   });
+  final Condition condition;
+  final String lastUpdated;
+  final double temperatureC;
+  final double temperatureF;
+  final double uv;
+  final double preciptationMM;
+  final int humidity;
+  int get tempCInteger => temperatureC.toInt();
+  int get tempFInteger => temperatureF.toInt();
 
   @override
   List<Object?> get props => [
@@ -51,17 +48,16 @@ class Current extends Equatable {
 }
 
 class Location extends Equatable {
-  final String name;
-  final String region;
-  final String country;
-  final String localtime;
-
   const Location({
     required this.name,
     required this.region,
     required this.country,
     required this.localtime,
   });
+  final String name;
+  final String region;
+  final String country;
+  final String localtime;
 
   @override
   List<Object> get props => [
@@ -73,14 +69,16 @@ class Location extends Equatable {
 }
 
 class Condition extends Equatable {
-  final String text;
-  final String icon;
-  final int code;
   const Condition({
     required this.text,
     required this.icon,
     required this.code,
   });
+
+  final String text;
+  final String icon;
+  final int code;
+
   @override
   List<Object> get props => [
         text,

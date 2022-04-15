@@ -12,7 +12,7 @@ class MockGetWeatherUseCase extends Mock implements GetWeatherUseCase {}
 void main() {
   late MockGetWeatherUseCase mockusecase;
   late WeatherBloc weatherBloc;
-  const String tQuery = 'Muzambinho';
+  const tQuery = 'Muzambinho';
 
   setUp(() {
     mockusecase = MockGetWeatherUseCase();
@@ -25,26 +25,27 @@ void main() {
   });
 
   group('Get Wather', () {
-    const Weather tWeather = Weather(
-        location: Location(
-          name: 'Muzambinho',
-          region: 'Minas Gerais',
-          country: 'Brazil',
-          localtime: '2022-02-07 23:39',
+    const tWeather = Weather(
+      location: Location(
+        name: 'Muzambinho',
+        region: 'Minas Gerais',
+        country: 'Brazil',
+        localtime: '2022-02-07 23:39',
+      ),
+      current: Current(
+        condition: Condition(
+          code: 1189,
+          text: 'Moderate rain',
+          icon: '//cdn.weatherapi.com/weather/64x64/night/302.png',
         ),
-        current: Current(
-          condition: Condition(
-            code: 1189,
-            text: 'Moderate rain',
-            icon: '//cdn.weatherapi.com/weather/64x64/night/302.png',
-          ),
-          lastUpdated: '2022-02-07 23:30',
-          temperatureC: 18.6,
-          temperatureF: 65.5,
-          uv: 1.0,
-          preciptationMM: 5.6,
-          humidity: 99,
-        ));
+        lastUpdated: '2022-02-07 23:30',
+        temperatureC: 18.6,
+        temperatureF: 65.5,
+        uv: 1,
+        preciptationMM: 5.6,
+        humidity: 99,
+      ),
+    );
 
     blocTest<WeatherBloc, WeatherState>(
       'should emit[loading, success] from get wather use case',

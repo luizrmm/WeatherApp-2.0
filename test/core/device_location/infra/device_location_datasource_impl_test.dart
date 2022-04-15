@@ -16,18 +16,18 @@ void main() {
     datasourceImpl = DeviceLocationDatasourceImpl(mockGeolocator);
   });
 
-  final DeviceLocationModel tDeviceLocationModel = DeviceLocationModel(
-    longitude: 43.0,
-    latitude: 42.0,
-    lastPositionTime: DateTime.parse("2022-02-08T21:21:00.000"),
+  final tDeviceLocationModel = DeviceLocationModel(
+    longitude: 43,
+    latitude: 42,
+    lastPositionTime: DateTime.parse('2022-02-08T21:21:00.000'),
     accuracy: 200,
   );
 
   const tPermissionWhileInUse = LocationPermission.whileInUse;
   const tPermissionAlways = LocationPermission.always;
 
-  group("Service Location status:", () {
-    test("should return true when servicelocation is enabled", () async {
+  group('Service Location status:', () {
+    test('should return true when servicelocation is enabled', () async {
       //arrange
       when(() => mockGeolocator.isLocationServiceEnabled()).thenAnswer(
         (invocation) async => Future.value(true),
@@ -41,7 +41,7 @@ void main() {
       expect(result, true);
     });
 
-    test("should return false when servicelocation is disabled", () async {
+    test('should return false when servicelocation is disabled', () async {
       //arrange
       when(() => mockGeolocator.isLocationServiceEnabled()).thenAnswer(
         (invocation) async => Future.value(false),
@@ -56,23 +56,26 @@ void main() {
     });
   });
 
-  group("Checkpermission:", () {
+  group('Checkpermission:', () {
     test(
-        "should throw  [LocationPermissionUnableToDetermineException] user deny 2 times",
+        'should throw  [LocationPermissionUnableToDetermineException] user deny 2 times',
         () async {
       //arrange
       when(() => mockGeolocator.checkPermission()).thenAnswer(
-          (invocation) async => LocationPermission.unableToDetermine);
+        (invocation) async => LocationPermission.unableToDetermine,
+      );
 
       //act
       final call = datasourceImpl.checkLocationPermission;
 
       //assert
 
-      expect(() => call(),
-          throwsA(isA<LocationPermissionUnableToDetermineException>()));
+      expect(
+        call,
+        throwsA(isA<LocationPermissionUnableToDetermineException>()),
+      );
     });
-    test("should call the request permission if user deny 1 time", () async {
+    test('should call the request permission if user deny 1 time', () async {
       //arrange
       when(() => mockGeolocator.checkPermission())
           .thenAnswer((invocation) async => LocationPermission.denied);
@@ -85,7 +88,7 @@ void main() {
       verify(() => mockGeolocator.requestPermission()).called(1);
     });
 
-    test("should throw  [LocationPermissionException] user deny 2 times",
+    test('should throw  [LocationPermissionException] user deny 2 times',
         () async {
       //arrange
       when(() => mockGeolocator.checkPermission())
@@ -97,11 +100,11 @@ void main() {
 
       //assert
 
-      expect(() => call(), throwsA(isA<LocationPermissionException>()));
+      expect(call, throwsA(isA<LocationPermissionException>()));
     });
 
     test(
-        "should throw [LocationPermissionForeverException] if user deny forever",
+        'should throw [LocationPermissionForeverException] if user deny forever',
         () async {
       //arrange
       when(() => mockGeolocator.checkPermission())
@@ -110,11 +113,11 @@ void main() {
       final call = datasourceImpl.checkLocationPermission;
 
       //assert
-      expect(() => call(), throwsA(isA<LocationPermissionForeverException>()));
+      expect(call, throwsA(isA<LocationPermissionForeverException>()));
     });
 
     test(
-        "should return [LocationPermission.always] if user accept location permission",
+        'should return [LocationPermission.always] if user accept location permission',
         () async {
       //arrange
       when(() => mockGeolocator.checkPermission())
@@ -126,8 +129,9 @@ void main() {
       expect(result, tPermissionAlways);
     });
 
-    test("""should return  [LocationPermission.whileInUse] if user accept 
-        location permission while app is in use""", () async {
+    test(
+        'should return  [LocationPermission.whileInUse] if user accept location permission while app is in use',
+        () async {
       //arrange
       when(() => mockGeolocator.checkPermission())
           .thenAnswer((invocation) async => LocationPermission.whileInUse);
@@ -139,21 +143,22 @@ void main() {
     });
   });
 
-  group("Get Position:", () {
-    test("should return the current position when call is successfully",
+  group('Get Position:', () {
+    test('should return the current position when call is successfully',
         () async {
       //arrange
-      when(() => mockGeolocator.getCurrentPosition())
-          .thenAnswer((invocation) async => Position(
-                longitude: 43.0,
-                latitude: 42.0,
-                timestamp: DateTime.parse("2022-02-08T21:21:00.000"),
-                accuracy: 200,
-                altitude: 0,
-                heading: 0,
-                speed: 0,
-                speedAccuracy: 0,
-              ));
+      when(() => mockGeolocator.getCurrentPosition()).thenAnswer(
+        (invocation) async => Position(
+          longitude: 43,
+          latitude: 42,
+          timestamp: DateTime.parse('2022-02-08T21:21:00.000'),
+          accuracy: 200,
+          altitude: 0,
+          heading: 0,
+          speed: 0,
+          speedAccuracy: 0,
+        ),
+      );
 
       //act
       final result = await datasourceImpl.getLocation();
@@ -162,7 +167,7 @@ void main() {
       expect(result, equals(tDeviceLocationModel));
     });
 
-    test("should throw a [GeolocationException] when call is fail", () async {
+    test('should throw a [GeolocationException] when call is fail', () async {
       //arrange
       when(() => mockGeolocator.getCurrentPosition()).thenThrow(Exception());
 
@@ -170,7 +175,7 @@ void main() {
       final call = datasourceImpl.getLocation;
 
       //assert
-      expect(() => call(), throwsA(isA<GetLocationException>()));
+      expect(call, throwsA(isA<GetLocationException>()));
     });
   });
 }

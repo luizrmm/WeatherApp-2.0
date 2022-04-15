@@ -15,7 +15,8 @@ DeviceLocationModel _$DeviceLocationModelFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$DeviceLocationModelToJson(
-        DeviceLocationModel instance) =>
+  DeviceLocationModel instance,
+) =>
     <String, dynamic>{
       'longitude': instance.longitude,
       'latitude': instance.latitude,

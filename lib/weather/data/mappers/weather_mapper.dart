@@ -55,10 +55,11 @@ class _LocationMapper {
 
   static LocationModel toModel(Location entity) {
     return LocationModel(
-        name: entity.name,
-        region: entity.region,
-        country: entity.country,
-        localtime: entity.localtime);
+      name: entity.name,
+      region: entity.region,
+      country: entity.country,
+      localtime: entity.localtime,
+    );
   }
 }
 

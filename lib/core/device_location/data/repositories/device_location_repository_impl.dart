@@ -7,9 +7,8 @@ import 'package:weather_app/core/device_location/domain/repositories/device_loca
 import 'package:weather_app/core/errors/failures.dart';
 
 class DeviceLocationRepositoryImpl implements DeviceLocationRepository {
-  final DeviceLocationDatasource datasource;
-
   DeviceLocationRepositoryImpl(this.datasource);
+  final DeviceLocationDatasource datasource;
   @override
   Future<Either<Failure, DeviceLocation>> getLocation() async {
     if (await datasource.serviceLocationStatus) {

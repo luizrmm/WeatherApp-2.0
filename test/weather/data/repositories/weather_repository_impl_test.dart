@@ -19,7 +19,7 @@ void main() {
     repositoryImpl = WeatherRepositoryImpl(datasource: mockDatasource);
   });
 
-  const WeatherModel tWeatherModel = WeatherModel(
+  const tWeatherModel = WeatherModel(
     location: LocationModel(
       name: 'Muzambinho',
       region: 'Minas Gerais',
@@ -35,13 +35,13 @@ void main() {
       lastUpdated: '2022-02-08 20:00',
       temperatureC: 19.3,
       temperatureF: 66.7,
-      uv: 1.0,
+      uv: 1,
       preciptationMM: 1.5,
       humidity: 97,
     ),
   );
 
-  const Weather tWeather = Weather(
+  const tWeather = Weather(
     location: Location(
       name: 'Muzambinho',
       region: 'Minas Gerais',
@@ -57,13 +57,13 @@ void main() {
       lastUpdated: '2022-02-08 20:00',
       temperatureC: 19.3,
       temperatureF: 66.7,
-      uv: 1.0,
+      uv: 1,
       preciptationMM: 1.5,
       humidity: 97,
     ),
   );
 
-  const String tQuery = 'Muzambinho';
+  const tQuery = 'Muzambinho';
   group('Get Weahter', () {
     test(
         'should return the remote data when call to the datasource is successfull',
@@ -77,7 +77,7 @@ void main() {
 
       //assert
       verify(() => mockDatasource.getWeather(tQuery));
-      expect(result, equals(const Right(tWeather)));
+      expect(result, equals(const Right<dynamic, Weather>(tWeather)));
       verifyNoMoreInteractions(mockDatasource);
     });
   });
@@ -94,7 +94,12 @@ void main() {
 
     // assert
     verify(() => mockDatasource.getWeather(tQuery));
-    expect(result, equals(Left(GetCurrentWeatherFailure())));
+    expect(
+      result,
+      equals(
+        Left<dynamic, GetCurrentWeatherFailure>(GetCurrentWeatherFailure()),
+      ),
+    );
     verifyNoMoreInteractions(mockDatasource);
   });
 }

@@ -11,13 +11,14 @@ part 'weather_state.dart';
 const String GET_WEATHER_MESSAGE_ERROR = 'Failed to get current weather';
 
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
-  final GetWeatherUseCase useCase;
-
   WeatherBloc({required this.useCase}) : super(const WeatherInitial()) {
     on<GetWeatherEvent>(_getWeather);
   }
+  final GetWeatherUseCase useCase;
   Future<void> _getWeather(
-      GetWeatherEvent event, Emitter<WeatherState> emit) async {
+    GetWeatherEvent event,
+    Emitter<WeatherState> emit,
+  ) async {
     emit(const WeatherLoading());
     final result = await useCase(GetWeatherParams(event.query));
     result.fold(

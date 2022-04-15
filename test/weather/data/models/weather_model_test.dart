@@ -6,7 +6,7 @@ import 'package:weather_app/weather/data/models/weather_model.dart';
 import '../../../fixtures/fixture_reader.dart';
 
 void main() {
-  const WeatherModel tCurrentWeatherModel = WeatherModel(
+  const tCurrentWeatherModel = WeatherModel(
     location: LocationModel(
       name: 'Muzambinho',
       region: 'Minas Gerais',
@@ -22,7 +22,7 @@ void main() {
       lastUpdated: '2022-02-08 20:00',
       temperatureC: 19.3,
       temperatureF: 66.7,
-      uv: 1.0,
+      uv: 1,
       preciptationMM: 1.5,
       humidity: 97,
     ),
@@ -31,8 +31,8 @@ void main() {
   group('fromJson', () {
     test('should return a valid model when the json is a current weather', () {
       // arrange
-      final Map<String, dynamic> jsonMap =
-          jsonDecode(fixture('current_weather.json'));
+      final jsonMap =
+          jsonDecode(fixture('current_weather.json')) as Map<String, dynamic>;
       // act
       final result = WeatherModel.fromJson(jsonMap);
       // assert
@@ -47,8 +47,8 @@ void main() {
         // act
         final result = tCurrentWeatherModel.toJson();
         // assert
-        final Map<String, dynamic> expectedMap =
-            jsonDecode(fixture('current_weather.json'));
+        final expectedMap =
+            jsonDecode(fixture('current_weather.json')) as Map<String, dynamic>;
         expect(result, expectedMap);
       },
     );

@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/core/helpers/date_helpers.dart';
 
 class WeatherInfo extends StatelessWidget {
-  final String lastUpdate;
-  final String uv;
-  final String preciptation;
-  final String humidity;
   const WeatherInfo({
     Key? key,
     required this.lastUpdate,
@@ -13,20 +9,23 @@ class WeatherInfo extends StatelessWidget {
     required this.preciptation,
     required this.humidity,
   }) : super(key: key);
+  final String lastUpdate;
+  final String uv;
+  final String preciptation;
+  final String humidity;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60.0,
+      height: 60,
       width: double.maxFinite,
       padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 20),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.secondary,
-        borderRadius: BorderRadius.circular(10.0),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.center,

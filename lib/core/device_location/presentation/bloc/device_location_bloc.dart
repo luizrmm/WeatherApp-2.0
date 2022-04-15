@@ -9,13 +9,16 @@ part 'device_location_state.dart';
 
 class DeviceLocationBloc
     extends Bloc<DeviceLocationEvent, DeviceLocationState> {
-  final GetDeviceLocationUseCase deviceLocationUseCase;
   DeviceLocationBloc({required this.deviceLocationUseCase})
       : super(const DeviceLocationInitial()) {
     on<GetLocationEvent>(_getLocation);
   }
+  final GetDeviceLocationUseCase deviceLocationUseCase;
+
   Future<void> _getLocation(
-      GetLocationEvent event, Emitter<DeviceLocationState> emit) async {
+    GetLocationEvent event,
+    Emitter<DeviceLocationState> emit,
+  ) async {
     final result = await deviceLocationUseCase(GetDeviceLocationParams());
     result.fold(
       (failure) => emit(LocationStateError(failure)),

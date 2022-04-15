@@ -8,22 +8,22 @@ import '../../../../fixtures/fixture_reader.dart';
 
 void main() {
   final tDeviceLocationModel = DeviceLocationModel(
-    longitude: 43.0,
-    latitude: 42.0,
-    lastPositionTime: DateTime.parse("2022-02-08 21:21"),
+    longitude: 43,
+    latitude: 42,
+    lastPositionTime: DateTime.parse('2022-02-08 21:21'),
     accuracy: 200,
   );
 
-  test("should be a DeviceLocation entity subclass", () {
+  test('should be a DeviceLocation entity subclass', () {
     //assert
     expect(tDeviceLocationModel, isA<DeviceLocation>());
   });
 
-  group("From json", () {
-    test("should return a Device Location Model when json is valid", () {
+  group('From json', () {
+    test('should return a Device Location Model when json is valid', () {
       //arrange
-      Map<String, dynamic> jsonMap =
-          jsonDecode(fixture("device_location.json"));
+      final jsonMap =
+          jsonDecode(fixture('device_location.json')) as Map<String, dynamic>;
       //act
       final result = DeviceLocationModel.fromJson(jsonMap);
 
@@ -32,17 +32,17 @@ void main() {
     });
   });
 
-  group("ToJson", () {
-    test("should return a json object containing a device location info", () {
+  group('ToJson', () {
+    test('should return a json object containing a device location info', () {
       //act
       final result = tDeviceLocationModel.toJson();
 
       //assert
-      final Map<String, dynamic> expectedMap = {
-        "longitude": 43.0,
-        "latitude": 42.0,
-        "lastPositionTime": "2022-02-08T21:21:00.000",
-        "accuracy": 200
+      final expectedMap = <String, dynamic>{
+        'longitude': 43.0,
+        'latitude': 42.0,
+        'lastPositionTime': '2022-02-08T21:21:00.000',
+        'accuracy': 200
       };
       expect(result, expectedMap);
     });

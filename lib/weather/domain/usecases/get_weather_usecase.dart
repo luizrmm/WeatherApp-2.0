@@ -6,19 +6,17 @@ import 'package:weather_app/weather/domain/entities/weather.dart';
 import 'package:weather_app/weather/domain/repositories/weather_repository.dart';
 
 class GetWeatherUseCase implements UseCase<Weather, GetWeatherParams> {
-  final WeatherRepository repository;
-
   GetWeatherUseCase(this.repository);
+  final WeatherRepository repository;
   @override
   Future<Either<Failure, Weather>> call(GetWeatherParams params) async {
-    return await repository.getWeather(query: params.query);
+    return repository.getWeather(query: params.query);
   }
 }
 
 class GetWeatherParams extends Equatable {
-  final String query;
-
   const GetWeatherParams(this.query);
+  final String query;
 
   @override
   List<Object?> get props => [query];

@@ -15,9 +15,8 @@ class DeviceLocationInitial extends DeviceLocationState {
 }
 
 class LocationStateSuccess extends DeviceLocationState {
-  final DeviceLocation location;
-
   const LocationStateSuccess(this.location);
+  final DeviceLocation location;
   @override
   List<Object> get props => [location];
 }
@@ -27,6 +26,6 @@ class LocationStateInitial extends DeviceLocationState {
 }
 
 class LocationStateError extends DeviceLocationState {
-  final Failure errorType;
   const LocationStateError(this.errorType);
+  final Failure errorType;
 }

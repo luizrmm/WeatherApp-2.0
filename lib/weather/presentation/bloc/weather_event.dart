@@ -8,8 +8,8 @@ abstract class WeatherEvent extends Equatable {
 }
 
 class GetWeatherEvent extends WeatherEvent {
-  final String query;
   const GetWeatherEvent({required this.query});
+  final String query;
 
   @override
   List<Object> get props => [query];

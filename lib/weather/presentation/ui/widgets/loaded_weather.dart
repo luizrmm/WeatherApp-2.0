@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/core/helpers/weather_condition.dart';
 import 'package:weather_app/weather/presentation/bloc/weather_bloc.dart';
-
-import 'location_name.dart';
-import 'weather_info.dart';
+import 'package:weather_app/weather/presentation/ui/widgets/location_name.dart';
+import 'package:weather_app/weather/presentation/ui/widgets/weather_info.dart';
 
 class LoadedWeather extends StatelessWidget {
   const LoadedWeather({
@@ -27,7 +26,7 @@ class LoadedWeather extends StatelessWidget {
         Text(
           '${state.weather.current.tempCInteger.toString()} ˚',
           style: TextStyle(
-            fontSize: 70.0,
+            fontSize: 70,
             fontWeight: FontWeight.w500,
             color: Theme.of(context).textTheme.headline1!.color,
           ),
