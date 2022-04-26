@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/core/device_location/presentation/bloc/device_location_bloc.dart';
 import 'package:weather_app/core/ui/themes.dart';
 import 'package:weather_app/injection_container.dart' as di;
+import 'package:weather_app/weather/presentation/bloc/weather_bloc.dart';
 import 'package:weather_app/weather/presentation/ui/home.dart';
 
 Future<void> main() async {
@@ -17,8 +18,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => di.sl<DeviceLocationBloc>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<DeviceLocationBloc>(
+          create: (context) => di.sl<DeviceLocationBloc>(),
+        ),
+        BlocProvider<WeatherBloc>(
+          create: (context) => di.sl<WeatherBloc>(),
+        )
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
