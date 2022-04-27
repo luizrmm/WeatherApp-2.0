@@ -46,6 +46,7 @@ class _WeatherViewState extends State<WeatherView> {
                   builder: (context, state) {
                     if (state is WeatherSuccess) {
                       return LoadedWeather(
+                        key: const Key('LOADED_WEATHER'),
                         state: state,
                       );
                     } else if (state is WeatherError) {

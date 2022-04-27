@@ -12,6 +12,7 @@ class CustomField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      key: const Key('SEARCH_FIELD'),
       controller: controller,
       onFieldSubmitted: (value) {
         if (formKey.currentState!.validate()) {
@@ -23,6 +24,7 @@ class CustomField extends StatelessWidget {
         filled: true,
         fillColor: Theme.of(context).colorScheme.secondary,
         suffixIcon: IconButton(
+          key: const Key('SEARCH_BUTTON'),
           onPressed: () {
             if (formKey.currentState!.validate()) {
               search(controller.text, context);
