@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:integration_test/integration_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:weather_app/core/device_location/domain/entities/device_location.dart';
 import 'package:weather_app/core/device_location/presentation/bloc/device_location_bloc.dart';
@@ -18,6 +19,7 @@ class MockDeviceLocationBloc
     implements DeviceLocationBloc {}
 
 void main() {
+  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   late MockWeatherBloc mockWeatherBloc;
   late MockDeviceLocationBloc mockDeviceLocationBloc;
   late GetWeatherEvent getWeatherEvent;
@@ -91,13 +93,14 @@ void main() {
   testWidgets('Enter query name and search for the weather',
       (WidgetTester tester) async {
     setupSuccessStates();
+
     await tester.pumpWidget(createWidgetUnserTest());
-    await tester.pump();
     await tester.enterText(find.byKey(const Key('SEARCH_FIELD')), 'Muzambinho');
     await tester.tap(
       find.byKey(const Key('SEARCH_BUTTON')),
     );
     await tester.pumpAndSettle();
+
     expect(find.byKey(const Key('LOADED_WEATHER')), findsOneWidget);
     expect(find.text('Muzambinho'), findsOneWidget);
   });

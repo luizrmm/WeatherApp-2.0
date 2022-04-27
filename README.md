@@ -1,16 +1,24 @@
 # weather_app
 
-A new Flutter project.
+Flutter project
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project was built with the objective of putting into practice my knowledge in Flutter and Dart
 
-A few resources to get you started if this is your first Flutter project:
+To run the project it is necessary to create an account on the site
+[Weather Api](https://www.weatherapi.com), create a file called api_key.dart in the root of the project where the api key will be inserted, after that just run the app
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Screenshots
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This app use location of the device to return firts weather information, please alow
+
+[<img src="doc_images/location.png" width="300">](doc_images/location.png)
+
+### Light Theme
+
+[<img src="doc_images/light_theme.png" width="300">](doc_images/light_theme.png)
+
+### Dark Theme
+
+[<img src="doc_images/dark_theme.png" width="300">](doc_images/dark_theme.png)
